@@ -3,25 +3,28 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect, lazy } from 'react';
 import { useAuth } from 'hooks';
 import { refreshUser } from 'redux/auth/operations';
-import { RestrictedRoute } from './RestrictedRoute';
-import { PrivateRoute } from './PrivateRoute';
-import { Layout } from './Layout';
-import { Home } from '../pages/Home';
+import { RestrictedRoute } from 'components/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute';
+import { Layout } from 'components/Layout';
+import { Home } from 'pages/Home';
+import Loader from 'components/Loader';
+import { LoaderDiv } from './App.styled';
 
-const RegisterPage = lazy(() => import('../pages/Register'));
-const LoginPage = lazy(() => import('../pages/Login'));
-const ContactsPage = lazy(() => import('../pages/Contacts'));
+const RegisterPage = lazy(() => import('pages/Register'));
+const LoginPage = lazy(() => import('pages/Login'));
+const ContactsPage = lazy(() => import('pages/Contacts'));
 
-const App = () => {
+export const App = () => {
   const dispatch = useDispatch();
-
   const { isRefreshing } = useAuth();
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <LoaderDiv>
+      <Loader />
+    </LoaderDiv>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -51,5 +54,3 @@ const App = () => {
     </Routes>
   );
 };
-
-export default App;
