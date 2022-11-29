@@ -14,6 +14,7 @@ export const Label = styled.label`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 24px;
 `;
 
 export const Field = styled.input`
@@ -25,14 +26,15 @@ export const Field = styled.input`
 `;
 
 export const Add = styled.button`
-  font-size: 24px;
+  font-size: 16px;
   border-radius: 8px;
   border: none;
   padding: 10px;
   cursor: pointer;
   margin-bottom: 10px;
+  background-color: darkgray;
   &:hover {
-    background-color: darkgray;
+    background-color: green;
   }
 `;
 export const OpenForm = styled.button`

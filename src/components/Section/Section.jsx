@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectError, selectIsLoading } from 'redux/contact/selectors';
-import Loader from 'components/Loader';
+import { Loader } from '../Loader';
 
 const Section = ({ header, title, children }) => {
   const isLoading = useSelector(selectIsLoading);

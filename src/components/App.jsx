@@ -7,8 +7,8 @@ import { RestrictedRoute } from 'components/RestrictedRoute';
 import { PrivateRoute } from 'components/PrivateRoute';
 import { Layout } from 'components/Layout';
 import { Home } from 'pages/Home';
-import Loader from 'components/Loader';
-import { LoaderDiv } from './App.styled';
+import { Loader } from 'components/Loader';
+import { CenteredDiv } from './App.styled';
 
 const RegisterPage = lazy(() => import('pages/Register'));
 const LoginPage = lazy(() => import('pages/Login'));
@@ -22,9 +22,9 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
   return isRefreshing ? (
-    <LoaderDiv>
+    <CenteredDiv>
       <Loader />
-    </LoaderDiv>
+    </CenteredDiv>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>

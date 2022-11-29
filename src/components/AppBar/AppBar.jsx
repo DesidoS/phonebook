@@ -10,9 +10,6 @@ export const AppBar = () => {
   return (
     <Header>
       <Navigation />
-      {/* <NavLink to="/" end>
-        Home
-      </NavLink> */}
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </Header>
   );
