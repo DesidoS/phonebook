@@ -15,18 +15,6 @@ export const Label = styled.label`
   align-items: center;
   margin-bottom: 10px;
 `;
-export const TypeLabel = styled.label`
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-`;
-export const Radio = styled.input`
-  margin-top: 10px;
-`;
-export const Type = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 
 export const Field = styled.input`
   height: 32px;

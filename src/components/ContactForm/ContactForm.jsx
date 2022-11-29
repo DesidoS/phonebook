@@ -1,29 +1,17 @@
 import { useState, useRef } from 'react';
-
 import { Notify } from 'notiflix';
-import {
-  Form,
-  Label,
-  Field,
-  Add,
-  TypeLabel,
-  Type,
-  Radio,
-  OpenForm,
-} from './ContactForm.styled';
+import { Form, Label, Field, Add, OpenForm } from './ContactForm.styled';
 import { Flipper, Flipped } from 'react-flip-toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { GiFactory, GiSmartphone, GiFamilyHouse } from 'react-icons/gi';
 import { TiDelete } from 'react-icons/ti';
-import { addContacts } from 'redux/operations';
+import { addContacts } from 'redux/contact/operations';
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.contacts);
   const [isOpen, setIsOpen] = useState(false);
   const [name, setContactName] = useState('');
   const [number, setNumber] = useState('');
-  const [type, setType] = useState('mobile');
   const ref = useRef();
 
   const toggleState = () => {
@@ -42,9 +30,6 @@ const ContactForm = () => {
     if (fieldName === 'number') {
       setNumber(fieldValue);
     }
-    if (fieldName === 'type') {
-      setType(fieldValue);
-    }
   };
 
   const onSubmit = e => {
@@ -61,7 +46,7 @@ const ContactForm = () => {
         return;
       }
     }
-    dispatch(addContacts({ name, number, type }));
+    dispatch(addContacts({ name, number }));
     form.reset();
     setIsOpen(false);
   };
@@ -95,38 +80,6 @@ const ContactForm = () => {
                     onChange={onInputChange}
                   />
                 </Label>
-                <Type>
-                  <TypeLabel>
-                    <GiSmartphone />
-                    <Radio
-                      type="radio"
-                      checked={type === 'mobile'}
-                      name="type"
-                      value="mobile"
-                      onChange={onInputChange}
-                    />
-                  </TypeLabel>
-                  <TypeLabel>
-                    <GiFactory />
-                    <Radio
-                      type="radio"
-                      checked={type === 'work'}
-                      name="type"
-                      value="work"
-                      onChange={onInputChange}
-                    />
-                  </TypeLabel>
-                  <TypeLabel>
-                    <GiFamilyHouse />
-                    <Radio
-                      type="radio"
-                      checked={type === 'home'}
-                      name="type"
-                      value="home"
-                      onChange={onInputChange}
-                    />
-                  </TypeLabel>
-                </Type>
                 <Add type="submit">Add contact</Add>
                 <OpenForm type="button" onClick={() => setIsOpen(false)}>
                   <TiDelete

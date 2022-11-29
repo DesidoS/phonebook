@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectError, selectIsLoading } from 'redux/contact/selectors';
+import Loader from 'components/Loader';
 
 const Section = ({ header, title, children }) => {
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
   return (
     <>
       {header && <h1>{header}</h1>}
-      {title && <h2>{title}</h2>}
+      {title && (isLoading && !error ? <Loader /> : <h2>{title}</h2>)}
 
       {children}
     </>
