@@ -8,7 +8,8 @@ import { PrivateRoute } from 'components/PrivateRoute';
 import { Layout } from 'components/Layout';
 import { Home } from 'pages/Home';
 import { Loader } from 'components/Loader';
-import { CenteredDiv } from './App.styled';
+
+import { ChakraProvider, Flex } from '@chakra-ui/react';
 
 const RegisterPage = lazy(() => import('pages/Register'));
 const LoginPage = lazy(() => import('pages/Login'));
@@ -22,35 +23,42 @@ export const App = () => {
     dispatch(refreshUser());
   }, [dispatch]);
   return isRefreshing ? (
-    <CenteredDiv>
-      <Loader />
-    </CenteredDiv>
+    <ChakraProvider>
+      <Flex justifyContent="center">
+        <Loader />
+      </Flex>
+    </ChakraProvider>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute
-              redirectTo="/contacts"
-              component={<RegisterPage />}
-            />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
-          }
-        />
-      </Route>
-    </Routes>
+    <ChakraProvider>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute
+                redirectTo="/contacts"
+                component={<LoginPage />}
+              />
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+            }
+          />
+        </Route>
+      </Routes>
+    </ChakraProvider>
   );
 };

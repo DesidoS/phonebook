@@ -1,8 +1,8 @@
-import { CenteredDiv } from 'components/App.styled';
+// import { CenteredDiv } from 'components/App.styled';
 export const Home = () => {
   return (
-    <CenteredDiv>
+    <div>
       <h1>Welcome!</h1>
-    </CenteredDiv>
+    </div>
   );
 };

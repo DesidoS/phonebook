@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { selectError, selectIsLoading } from 'redux/contact/selectors';
 import { Loader } from '../Loader';
+import { Heading, Flex } from '@chakra-ui/react';
 
 const Section = ({ header, title, children }) => {
   const isLoading = useSelector(selectIsLoading);
@@ -9,8 +10,23 @@ const Section = ({ header, title, children }) => {
 
   return (
     <>
-      {header && <h1>{header}</h1>}
-      {title && (isLoading && !error ? <Loader /> : <h2>{title}</h2>)}
+      {header && (
+        <Flex justifyContent="center">
+          <Heading as="h1">{header}</Heading>
+        </Flex>
+      )}
+      {title &&
+        (isLoading && !error ? (
+          <Flex justifyContent="center">
+            <Loader />
+          </Flex>
+        ) : (
+          <Flex justifyContent="center">
+            <Heading as="h2" size="xl">
+              {title}
+            </Heading>
+          </Flex>
+        ))}
 
       {children}
     </>

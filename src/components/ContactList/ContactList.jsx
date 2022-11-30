@@ -1,8 +1,8 @@
-import { Delete, List, Item } from './ContactList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { TiDelete } from 'react-icons/ti';
 import { deleteContact } from 'redux/contact/operations';
 import { selectFilter, selectContacts } from 'redux/contact/selectors';
+import { List, ListItem, Flex, IconButton } from '@chakra-ui/react';
+import { DeleteIcon, PhoneIcon } from '@chakra-ui/icons';
 
 const ContactList = () => {
   const dispatch = useDispatch();
@@ -25,26 +25,27 @@ const ContactList = () => {
   if (!visibleContacts) return;
 
   return (
-    <List>
+    <Flex as={List} spacing={3} flexDirection="column">
       {visibleContacts.map(({ id, name, number }) => (
-        <Item key={id}>
-          <Delete
+        <Flex
+          as={ListItem}
+          justifyContent="space-between"
+          alignItems="center"
+          key={id}
+        >
+          <PhoneIcon color="green" />
+          {name} : {number}
+          <IconButton
+            color="red"
+            variant="outline"
+            icon={<DeleteIcon />}
             onClick={() => {
               handleDelete(id);
             }}
-          >
-            <TiDelete
-              style={{
-                color: 'tomato',
-                fontSize: '36px',
-                marginBottom: '-4px',
-              }}
-            />
-          </Delete>
-          {name} : {number}
-        </Item>
+          ></IconButton>
+        </Flex>
       ))}
-    </List>
+    </Flex>
   );
 };
 export default ContactList;

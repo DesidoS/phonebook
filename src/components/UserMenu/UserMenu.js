@@ -1,18 +1,23 @@
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
-import { Wrapper, Username, ButtonLogIn } from './UserMenu.styled';
+import { Flex, Button } from '@chakra-ui/react';
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
   const { user } = useAuth();
 
   return (
-    <Wrapper>
-      <Username>Welcome, {user.name}</Username>
-      <ButtonLogIn type="button" onClick={() => dispatch(logOut())}>
+    <Flex w={220} alignItems="center" justifyContent="space-between">
+      <p>Welcome, {user.name}</p>
+      <Button
+        size="xs"
+        variant="outline"
+        _hover={{ color: 'tomato' }}
+        onClick={() => dispatch(logOut())}
+      >
         Logout
-      </ButtonLogIn>
-    </Wrapper>
+      </Button>
+    </Flex>
   );
 };
