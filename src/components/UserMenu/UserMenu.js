@@ -8,9 +8,10 @@ export const UserMenu = () => {
   const { user } = useAuth();
 
   return (
-    <Flex w={220} alignItems="center" justifyContent="space-between">
-      <p>Welcome, {user.name}</p>
+    <Flex alignItems="center" justifyContent="space-between">
+      <p>Hi, {user?.name}</p>
       <Button
+        marginLeft={5}
         size="xs"
         variant="outline"
         _hover={{ color: 'tomato' }}

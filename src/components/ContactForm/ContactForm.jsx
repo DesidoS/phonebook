@@ -9,6 +9,7 @@ const ContactForm = () => {
   const contacts = useSelector(state => state.contacts.contacts);
   const [name, setContactName] = useState('');
   const [number, setNumber] = useState('');
+  const [email, setEmail] = useState('');
 
   const onInputChange = e => {
     const fieldName = e.currentTarget.name;
@@ -19,6 +20,9 @@ const ContactForm = () => {
     }
     if (fieldName === 'number') {
       setNumber(fieldValue);
+    }
+    if (fieldName === 'email') {
+      setEmail(fieldValue);
     }
   };
 
@@ -36,7 +40,7 @@ const ContactForm = () => {
         return;
       }
     }
-    dispatch(addContacts({ name, number }));
+    dispatch(addContacts({ name, phone: number, email }));
     form.reset();
   };
 
@@ -62,6 +66,17 @@ const ContactForm = () => {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
+            onChange={onInputChange}
+          />
+        </FormLabel>
+        <FormLabel>
+          Email
+          <Input
+            type="email"
+            name="email"
+            // pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            // title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            // required
             onChange={onInputChange}
           />
         </FormLabel>

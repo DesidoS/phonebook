@@ -26,21 +26,21 @@ const ContactList = () => {
 
   return (
     <Flex as={List} spacing={3} flexDirection="column">
-      {visibleContacts.map(({ id, name, number }) => (
+      {visibleContacts.map(({ _id, name, phone, email }) => (
         <Flex
           as={ListItem}
           justifyContent="space-between"
           alignItems="center"
-          key={id}
+          key={_id}
         >
           <PhoneIcon color="green" />
-          {name} : {number}
+          {name} : {phone} : {email}
           <IconButton
             color="red"
             variant="outline"
             icon={<DeleteIcon />}
             onClick={() => {
-              handleDelete(id);
+              handleDelete(_id);
             }}
           ></IconButton>
         </Flex>
