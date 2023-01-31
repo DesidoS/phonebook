@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
       const res = await axios.post('/api/auth/register', credentials);
       if (res.status === 201) {
         Notify.success(
-          `${res?.data?.name}Please check your email and verify your account.`
+          `${res?.data?.name}, please check your email and verify your account.`
         );
       }
       return res.data;
