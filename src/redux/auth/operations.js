@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
@@ -18,7 +19,11 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.post('/api/auth/register', credentials);
-      // setAuthHeader(res.data.token);
+      if (res.status === 201) {
+        Notify.success(
+          `${res?.data?.name}Please check your email and verify your account.`
+        );
+      }
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
