@@ -2,7 +2,8 @@ import axios from 'axios';
 import { Notify } from 'notiflix';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+// axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+axios.defaults.baseURL = 'https://contacts-4uyr.onrender.com';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
